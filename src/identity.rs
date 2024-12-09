@@ -78,6 +78,7 @@ impl TryInto<Keypair> for Identity {
 #[cfg(test)]
 pub mod tests {
     use super::*;
+    use ed25519_dalek::{Signer, Verifier};
 
     #[test]
     fn test_identity() -> Fallible<()> {

@@ -11,10 +11,11 @@ repository = "https://github.com/transumption/zerotier-rust"
 [dependencies]
 arrayref = "0.3.5"
 byteorder = "1.1.0"
-ed25519-dalek = "1.0.0-pre.1"
+ed25519-dalek = "1.0.1"
 failure = "0.1.5"
 hex = "0.4.0"
-salsa20 = "0.2.0"
-serde = { version = "1.0.89", features = ["derive"] }
-sha2 = "0.8.0"
-x25519-dalek = "0.5.2"
+salsa20 = "0.10.2"
+serde = { version = "1", features = ["derive"] }
+sha2 = "0.10.2"
+x25519-dalek = "1.2.0"
+generic-array = "0.14.4"

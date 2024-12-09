@@ -5,9 +5,9 @@ use failure::Error;
 use serde::*;
 use std::{convert::TryFrom, mem};
 
-use salsa20::stream_cipher::generic_array::GenericArray;
-use salsa20::stream_cipher::{NewStreamCipher, SyncStreamCipher};
 use salsa20::Salsa20;
+use salsa20::cipher::{KeyIvInit, StreamCipher};
+use generic_array::GenericArray;
 
 use sha2::{Digest, Sha512};
 
@@ -41,7 +41,7 @@ impl Serialize for Address {
 /// Ad-hoc memory-hard hash function used to derive address from ZeroTier public key.
 fn memory_hard_hash(public_key: &PublicKey) -> Result<[u8; BLOCK_SIZE], Error> {
     let mut buf = [0u8; BLOCK_SIZE];
-    let mut mem = [0u8; MEMORY_SIZE];
+    let mut mem = vec![0u8; MEMORY_SIZE];
 
     let public_key_bytes: [u8; PUBLIC_KEY_LENGTH] = public_key.into();
     buf.copy_from_slice(&Sha512::digest(&public_key_bytes));

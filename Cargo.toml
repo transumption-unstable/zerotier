@@ -3,7 +3,7 @@ name = "zerotier"
 edition = "2018"
 version = "0.1.0"
 
-authors = ["Yegor Timoshenko <yegortimoshenko@riseup.net>"]
+authors = ["Luka Teras <luka@sdf.org>"]
 description = "Library for interfacing with ZeroTier"
 license = "BSD-2-Clause-Patent"
 repository = "https://github.com/transumption/zerotier-rust"

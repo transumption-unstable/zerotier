@@ -1,12 +1,11 @@
 [package]
 name = "zerotier"
-edition = "2018"
 version = "0.1.0"
-
 authors = ["Luka Teras <luka@sdf.org>"]
 description = "Library for interfacing with ZeroTier"
 license = "BSD-2-Clause-Patent"
-repository = "https://github.com/transumption/zerotier-rust"
+repository = "https://github.com/lukateras/rust-zerotier-crypto"
+edition = "2018"
 
 [dependencies]
 arrayref = "0.3.5"

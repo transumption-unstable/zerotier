@@ -82,7 +82,7 @@ pub mod tests {
 
     #[test]
     fn test_identity() -> Fallible<()> {
-        // nix-shell -p zerotierone --run 'zerotier-idtool generate'
+        // `zerotier-idtool generate`
         let identity_str = "538c34e03c:0:070288330a72d2aa3cb7935dfe6028d9fb83bdb42240aaa05e33529121babd183ff775351742a47487454195c08c0e83c520e7466fcdde3396a0c4cd40557737:f20542ab6955fe140fb3a5be9557666b9c89a3e2b73432de46d827d11736773aca15c3e03b89a1d09436ae45bc02f84b8d5a0a2f6c0d42b3856c2b22f5ab2b27";
         let identity = Identity::try_from(identity_str)?;
 

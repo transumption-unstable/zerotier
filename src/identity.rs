@@ -1,6 +1,6 @@
 use crate::{Address, InternalError, PublicKey, SecretKey};
 
-use ed25519_dalek::Keypair;
+use ed25519_dalek::SigningKey;
 use failure::*;
 
 use std::convert::{TryFrom, TryInto};
@@ -64,14 +64,11 @@ impl TryFrom<&str> for Identity {
     }
 }
 
-impl TryInto<Keypair> for Identity {
+impl TryInto<SigningKey> for Identity {
     type Error = Error;
 
-    fn try_into(self) -> Fallible<Keypair> {
-        Ok(Keypair {
-            public: self.public_key.ed,
-            secret: self.secret_key.unwrap().ed,
-        })
+    fn try_into(self) -> Fallible<SigningKey> {
+        Ok(self.secret_key.unwrap().ed)
     }
 }
 
@@ -94,10 +91,7 @@ pub mod tests {
         assert_eq!(identity.public_key.ed, public_key.ed);
         assert_eq!(identity.public_key.dh.as_bytes(), public_key.dh.as_bytes());
 
-        let keypair = ed25519_dalek::Keypair {
-            public: public_key.ed,
-            secret: secret_key.ed,
-        };
+        let keypair = secret_key.ed;
 
         let message = b"7VbLpreCRY738Sw4OGecCw";
         let signature = keypair.sign(message);

@@ -11,7 +11,7 @@ pub const PUBLIC_KEY_LENGTH: usize = 64;
 #[derive(Clone, Debug)]
 pub struct PublicKey {
     /// Ed25519 public key (last 32 bytes)
-    pub ed: ed25519_dalek::PublicKey,
+    pub ed: ed25519_dalek::VerifyingKey,
     /// X25519 public key (first 32 bytes)
     pub dh: x25519_dalek::PublicKey,
 }
@@ -20,7 +20,7 @@ pub struct PublicKey {
 impl From<&SecretKey> for PublicKey {
     fn from(secret_key: &SecretKey) -> Self {
         Self {
-            ed: ed25519_dalek::PublicKey::from(&secret_key.ed),
+            ed: ed25519_dalek::VerifyingKey::from(&secret_key.ed),
             dh: x25519_dalek::PublicKey::from(&secret_key.dh),
         }
     }
@@ -35,8 +35,8 @@ impl TryFrom<&[u8]> for PublicKey {
             Err(InternalError::BytesLengthError.into())
         } else {
             Ok(Self {
-                ed: ed25519_dalek::PublicKey::from_bytes(&bytes[32..])?,
-                dh: x25519_dalek::PublicKey::from(*array_ref!(bytes, 0, 32)),
+                ed: ed25519_dalek::VerifyingKey::from_bytes(array_ref![bytes, 32, 32])?,
+                dh: x25519_dalek::PublicKey::from(array_ref![bytes, 0, 32].clone()),
             })
         }
     }

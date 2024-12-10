@@ -1,0 +1,26 @@
+name: GH Pages
+
+on:
+  push:
+    branches:
+    - trunk
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  doc:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: cargo doc --no-deps
+    - uses: actions/upload-pages-artifact@v3
+      with:
+        path: target/doc
+    - id: deployment
+      uses: actions/deploy-pages@v4
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}

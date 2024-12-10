@@ -5,7 +5,6 @@ use failure::Error;
 use serde::*;
 use std::{convert::TryFrom, mem};
 
-use generic_array::GenericArray;
 use salsa20::cipher::{KeyIvInit, StreamCipher};
 use salsa20::Salsa20;
 
@@ -47,8 +46,8 @@ fn memory_hard_hash(public_key: &PublicKey) -> Result<[u8; BLOCK_SIZE], Error> {
     buf.copy_from_slice(&Sha512::digest(&public_key_bytes));
 
     let mut cipher = Salsa20::new(
-        GenericArray::from_slice(&buf[0..32]),
-        GenericArray::from_slice(&buf[32..40]),
+        buf[0..32].into(),
+        buf[32..40].into(),
     );
 
     cipher.apply_keystream(&mut mem[..BLOCK_SIZE]);

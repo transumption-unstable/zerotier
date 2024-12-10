@@ -36,7 +36,7 @@ impl TryFrom<SecretKey> for Identity {
         Ok(Self {
             address: Address::try_from(&public_key)?,
             public_key: PublicKey::from(&secret_key),
-            secret_key: Some(secret_key)
+            secret_key: Some(secret_key),
         })
     }
 }
@@ -50,7 +50,7 @@ impl TryFrom<&str> for Identity {
         let (address, public_key, maybe_secret_key) = match &split_identity[..] {
             [address, "0", public_key] => (address, public_key, None),
             [address, "0", public_key, secret_key] => (address, public_key, Some(secret_key)),
-            _ => return Err(InternalError::MalformedIdentity.into())
+            _ => return Err(InternalError::MalformedIdentity.into()),
         };
 
         Ok(Identity {
@@ -58,8 +58,8 @@ impl TryFrom<&str> for Identity {
             public_key: PublicKey::try_from(hex::decode(public_key)?.as_slice())?,
             secret_key: match maybe_secret_key {
                 Some(secret_key) => Some(SecretKey::try_from(hex::decode(secret_key)?.as_slice())?),
-                None => None
-            }
+                None => None,
+            },
         })
     }
 }
@@ -70,7 +70,7 @@ impl TryInto<Keypair> for Identity {
     fn try_into(self) -> Fallible<Keypair> {
         Ok(Keypair {
             public: self.public_key.ed,
-            secret: self.secret_key.unwrap().ed
+            secret: self.secret_key.unwrap().ed,
         })
     }
 }

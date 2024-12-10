@@ -9,7 +9,5 @@ pub enum InternalError {
     #[fail(display = "malformed identity")]
     MalformedIdentity,
     #[fail(display = "reserved address")]
-    ReservedAddress
+    ReservedAddress,
 }
-
-

@@ -5,9 +5,9 @@ use failure::Error;
 use serde::*;
 use std::{convert::TryFrom, mem};
 
-use salsa20::Salsa20;
-use salsa20::cipher::{KeyIvInit, StreamCipher};
 use generic_array::GenericArray;
+use salsa20::cipher::{KeyIvInit, StreamCipher};
+use salsa20::Salsa20;
 
 use sha2::{Digest, Sha512};
 

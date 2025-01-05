@@ -70,7 +70,7 @@ impl From<PublicKeyError> for IdentityError {
     }
 }
 
-/// Error while parsing [`Identity`](struct.PublicKey.html) from a string.
+/// Error while parsing [`Identity`](struct.Identity.html) from a string.
 #[derive(Debug)]
 pub enum FromStrIdentityError {
     /// Expected 3 or 4 parts separated by `:`, got this many instead.

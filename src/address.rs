@@ -92,8 +92,6 @@ fn hashcash(public_key: &PublicKey) -> Result<[u8; BLOCK_SIZE], AddressError> {
     }
 }
 
-/// Tries to derive address from [`PublicKey`](struct.PublicKey.html). Throws
-/// [`InternalError`](enum.InternalError.html) for invalid addresses.
 impl TryFrom<&PublicKey> for Address {
     type Error = AddressError;
 
